@@ -1,0 +1,14 @@
+<%- include("partials/header") %>
+
+<% if (register) { %>
+    <h1>Welcome, <%= name.fname %></h1>
+<% } else { %>
+        <h1>Welcome, <%= name %></h1>
+<% } %>
+
+<a href="/read/accounts">Accounts</a>
+<a href="/read/balance">Balance</a>
+<a href="/read/transaction">Transaction</a>
+<a href="/read/loan">Loan</a>
+
+<%- include("partials/footer") %>

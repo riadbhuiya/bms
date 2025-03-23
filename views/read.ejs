@@ -1,0 +1,45 @@
+<%- include("partials/header") %>
+
+    <h1>Accounts</h1>
+
+    <% if (users) { %>
+        <% for (user of users) { %>
+            <p><%= user.uid %></p>
+            <p><%= `${user.fname} ${user.lname}` %></p>
+            <p><%= user.dob %></p>
+            <p><%= user.password %></p>
+            <p><%= user.address %></p>
+            <p><%= user.email %></p>
+            <p><%= user.phone %></p>
+        <% } %>
+    <% } %>
+
+    <% if (balance) { %>
+        <% for (b of balance) { %>
+            <p><%= b.bid %></p>
+            <p><%= b.balance %></p>
+            <p><%= b.uid %></p>
+        <% } %>
+    <% } %>
+
+    <% if (transaction) { %>
+        <% for (t of transaction) { %>
+            <p><%= t.tid %></p>
+            <p><%= t.date %></p>
+            <p><%= t.sender_uid %></p>
+            <p><%= t.receiver_uid %></p>
+            <p><%= t.amount %></p>
+        <% } %>
+    <% } %>
+
+    <% if (loan) { %>
+        <% for (l of loan) { %>
+            <p><%= l.lid %></p>
+            <p><%= l.amount %></p>
+            <p><%= l.duration %></p>
+            <p><%= l.installments %></p>
+            <p><%= l.bid %></p>
+        <% } %>
+    <% } %>
+
+<%- include("partials/footer") %>
