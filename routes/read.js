@@ -3,13 +3,16 @@ import { pool } from "../db.js";
 
 export const readRouter = express.Router();
 
-readRouter.get("/accounts", async (req, res) => {
+readRouter.get("/account/:fname", async (req, res) => {
 
     try{
+        const fname = req.params.fname;
+        console.log(fname);
+
         const connection = await pool.getConnection();
 
         const [ users ] = await connection.query(
-            'select * from user'
+            `select * from user where fname = "${fname}"`
         );
         console.log(users)
 
@@ -20,16 +23,27 @@ readRouter.get("/accounts", async (req, res) => {
     } catch (e) {
 
         console.log(`Database error: ${e}`)
+        res.send(`${e}`);
 
     }
 })
 
-readRouter.get("/balance", async (req, res) => {
+readRouter.get("/balance/:fname", async (req, res) => {
     try {
+        const fname = req.params.fname;
+
         const connection = await pool.getConnection();
 
         const [ balance ] = await connection.query(
-            'select * from balance'
+            `select balance.balance, balance.uid, user.fname
+
+            from balance
+            
+            inner join user
+            
+            on balance.uid = user.uid
+            
+            where fname = "${fname}"`
         );
 
         console.log(balance)
@@ -39,15 +53,26 @@ readRouter.get("/balance", async (req, res) => {
         res.render("read", { balance, users: false, transaction: false, loan: false })
     } catch (e) {
         console.log(`Database error: ${e}`)
+        res.send(`${e}`);
     }
 })
 
-readRouter.get("/transaction", async (req, res) => {
+readRouter.get("/transaction/:fname", async (req, res) => {
     try {
+        const fname = req.params.fname;
+
         const connection = await pool.getConnection();
 
         const [ transaction ] = await connection.query(
-            'select * from transaction'
+            `select transaction.tid, transaction.date, transaction.sender_uid, transaction.receiver_uid, transaction.amount, user.fname
+
+            from transaction
+            
+            inner join user
+            
+            on transaction.sender_uid = user.uid
+            
+            where fname = "${fname}"`
         );
 
         console.log(transaction)
@@ -57,11 +82,14 @@ readRouter.get("/transaction", async (req, res) => {
         res.render("read", { transaction, users: false, balance: false, loan: false })
     } catch (e) {
         console.log(`Database error: ${e}`)
+        res.send(`${e}`);
     }
 })
 
 readRouter.get("/loan", async (req, res) => {
     try {
+        const fname = req.params.fname;
+
         const connection = await pool.getConnection();
 
         const [ loan ] = await connection.query(
@@ -75,5 +103,6 @@ readRouter.get("/loan", async (req, res) => {
         res.render("read", { loan, users: false, balance: false, transaction: false })
     } catch (e) {
         console.log(`Database error: ${e}`)
+        res.send(`${e}`);
     }
 })

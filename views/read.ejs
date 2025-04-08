@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 
-    <h1>Accounts</h1>
+    <h1>Account</h1>
 
     <% if (users) { %>
         <% for (user of users) { %>
@@ -16,8 +16,9 @@
 
     <% if (balance) { %>
         <% for (b of balance) { %>
+            <p><%= b.fname %></p>
             <p><%= b.bid %></p>
-            <p><%= b.balance %></p>
+            <p>Balance: <%= b.balance %></p>
             <p><%= b.uid %></p>
         <% } %>
     <% } %>

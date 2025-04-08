@@ -8,3 +8,17 @@ body {
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
+/* main in home */
+.hmain {
+    display: flex;
+    flex-direction: row;
+}
+
+.type {
+    width: 250px;
+    height: 250px;
+    border-radius: 1rem;
+    background-color: aliceblue;
+}

@@ -11,6 +11,7 @@ loginRouter.post("/welcome", async (req, res) => {
     const email = req.body.email;
     console.log(email)
     const password = req.body.pass;
+    console.log(password);
 
     try {
         const connection = await pool.getConnection();
@@ -28,5 +29,6 @@ loginRouter.post("/welcome", async (req, res) => {
 
     } catch (e) {
         console.log(`Database error: ${e}`)
+        res.send(`${e}`);
     }
 })

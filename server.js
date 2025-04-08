@@ -1,8 +1,9 @@
-import express from "express";
 // import mysql from 'mysql2/promise';
+// import { pool } from "./db.js";
+import express from "express";
 import path from "path";
 import { fileURLToPath } from 'url';
-// import { pool } from "./db.js";
+import { homeRouter } from "./routes/home.js"
 import { readRouter } from "./routes/read.js"
 import { loginRouter } from "./routes/login.js"
 import { registerRouter } from "./routes/register.js"
@@ -21,12 +22,13 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 app.use("/public", express.static(path.join(__dirname, "public")))
 
+app.use("/home", homeRouter);
 app.use("/read", readRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 
 app.get("*", (req, res) => {
-    res.redirect("/login")
+    res.redirect("/home")
 })
 
 app.listen(port, () => {
