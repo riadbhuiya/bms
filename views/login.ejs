@@ -1,17 +1,25 @@
 <%- include("partials/header") %>
 
-    <h1>Login</h1>
+<main class="login">
+    <h1 class="title">Login</h1>
 
     <form id="login" action="/login/welcome" method="post">
         <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
 
         <label for="pass">Password</label>
         <input type="password" id="pass" name="pass" required>
 
         <button>Login</button>
     </form>
+    
+    <a href="/register"><button>Register</button></a>
 
-    <a href="/register">Register</a>
+    <% const register = false; %>
+    <% const query = ``; %>
+    <% if (register && query !== ``) { %>
+        <p class="query">Query: <%= query %></p>
+    <% } %>
+</main>
 
 <%- include("partials/footer") %>

@@ -19,6 +19,8 @@ registerRouter.post("/", async (req, res) => {
 
 
     try {
+        const query = `transaction`;
+
         const connection = await pool.getConnection();
 
         const [ data ] = await connection.query(
@@ -32,7 +34,7 @@ registerRouter.post("/", async (req, res) => {
         console.log(data);
         console.log(name);
 
-        res.render("login", { name, register: true })
+        res.render("login", { name, register: true, query })
 
 
     } catch (e) {

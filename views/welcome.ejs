@@ -1,20 +1,33 @@
 <%- include("partials/header") %>
 
-<% if (register) { %>
-    <h1>Welcome, <%= name.fname %></h1>
-    <a href="/read/account/<%= name.fname %>">Account</a>
-    <a href="/read/balance/<%= name.fname %>">Balance</a>
-    <a href="/read/transaction/<%= name.fname %>">Transaction</a>
-    <a href="/read/loan/<%= name.fname %>">Loan</a>
-<% } else { %>
-    <h1>Welcome, <%= name %></h1>
-    <a href="/read/account/<%= name %>">Account</a>
-    <a href="/read/balance/<%= name %>">Balance</a>
-    <a href="/read/transaction/<%= name %>">Transaction</a>
-    <a href="/read/loan/<%= name %>">Loan</a>
-<% } %>
+<main class="welcome">
 
+    <% if (register) { %>
 
+        <h1 class="title">Welcome, <%= name.fname %></h1>
+        <p class="query">Query: <%= query %></p>
 
+        <div class="links">
+            <a href="/read/account/<%= name.fname %>">Account</a>
+            <a href="/read/balance/<%= name.fname %>">Balance</a>
+            <a href="/read/transaction/<%= name.fname %>">Transaction</a>
+            <a href="/read/loan/<%= name.fname %>">Loan</a>
+        </div>
+
+    <% } else { %>
+
+        <h1 class="title">Welcome, <%= name %></h1>
+        <p class="query">Query: <%= query %></p>
+
+        <div class="links">
+            <a href="/read/account/<%= name %>"><div>Account</div></a>
+            <a href="/read/balance/<%= name %>"><div>Balance</div></a>
+            <a href="/read/transaction/<%= name %>"><div>Transaction</div></a>
+            <a href="/read/loan/<%= name %>"><div>Loan</div></a>
+        </div>
+
+    <% } %>
+
+</main>
 
 <%- include("partials/footer") %>

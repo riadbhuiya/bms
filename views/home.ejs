@@ -1,15 +1,23 @@
 <%- include("partials/header") %>
 
-<h1>Welcome</h1>
 
-<main class="hmain">
-    <div class="type">
-        <img src="/public/img/" alt="">
-        <h2>Employee</h2>
-    </div>
-    <div class="type">
-        <img src="/public/img/" alt="">
-        <h2>Customer</h2>
+<main class="content">
+    <h1 class="title">Welcome.</h1>
+
+    <div class="hmain">
+        <a class="type" href="/login">
+            <div>
+                <img src="/public/img/emp.png" alt="employee icon">
+                <h2>Employee</h2>
+            </div>
+        </a>
+    
+        <a class="type" href="/login">
+            <div>
+                <img src="/public/img/cust.png" alt="customer icon">
+                <h2>Customer</h2>
+            </div>
+        </a>
     </div>
 </main>
 

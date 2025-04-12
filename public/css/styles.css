@@ -1,24 +1,175 @@
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    min-height: 100vh;
-    width: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	min-height: 100vh;
+	width: 100%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* home */
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
-/* main in home */
+h1 {
+	text-align: center;
+}
+
+button,
+input {
+	height: 1.8rem;
+	border: none;
+	border-radius: 1rem;
+}
+
+input {
+	background-color: #e9e9ed;
+	padding: 0 1rem;
+}
+
+.title {
+	margin: 2rem auto;
+}
+
 .hmain {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	min-height: 100%;
+	height: 600px;
 }
 
 .type {
-    width: 250px;
-    height: 250px;
-    border-radius: 1rem;
-    background-color: aliceblue;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	height: 250px;
+	border-radius: 1rem;
+	background-color: aliceblue;
+	margin: 2rem 2rem;
+	text-decoration: none;
+}
+
+.type > div:hover {
+	border-radius: 1rem;
+}
+/* login */
+
+.login,
+.welcome,
+.read,
+.register {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#login, #register {
+	display: flex;
+	flex-direction: column;
+	width: 25%;
+	min-width: 200px;
+}
+
+#login > input,
+#login > button,
+#register > input {
+	margin-bottom: 0.8rem;
+}
+
+#login > button,
+#register > button {
+	color: white;
+	background-color: rgb(42, 142, 255);
+}
+
+#login > button:hover,
+#register > button:hover {
+	background-color: rgb(77, 159, 253);
+}
+
+.login > a,
+.register > a {
+	width: 25%;
+	min-width: 200px;
+	height: fit-content;
+}
+
+.login > a > button,
+.register > a > button {
+	width: 100%;
+}
+
+/* links */
+
+.links {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.links > a {
+	width: 150px;
+	height: 150px;
+	background-color: aliceblue;
+	margin: 0.5rem;
+	text-align: center;
+	text-decoration: none;
+	padding: auto;
+	border-radius: 0.8rem;
+}
+
+.links > a:hover,
+.hmain > a > :hover {
+	background-color: rgb(194, 227, 255);
+}
+
+.links > a > div,
+.hmain > a > div {
+	margin: auto 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* query */
+
+.query {
+	color: rgb(0, 182, 214);
+	margin-bottom: 0.8rem;
+	width: 80%;
+	text-align: center;
+}
+
+/* register */
+
+#register, .register{
+	margin-bottom: 0.8rem;
+}
+
+#register > button {
+	margin-top: 1rem;
+}
+
+
+@media (max-width: 768px) {
+    .links, .hmain {
+        /* flex-direction: column; */
+        flex-wrap: wrap;
+    }
 }
