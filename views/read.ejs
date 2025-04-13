@@ -84,6 +84,7 @@
                     <td>Date</td>
                     <td>Sender ID</td>
                     <td>Receiver ID</td>
+                    <td>Receiver Name</td>
                     <td>Amount</td>
                 </tr>
             </thead>
@@ -95,6 +96,7 @@
                     <td><%= t.date %></td>
                     <td><%= t.sender_uid %></td>
                     <td><%= t.receiver_uid %></td>
+                    <td><%= t.receiver_name %></td>
                     <td><%= t.amount %></td>
                 </tr>
             </tbody>
@@ -102,15 +104,54 @@
         </table>
     <% } %>
 
-    <% if (loan) { %>
+    <% if (loans) { %>
         <p class="query">Query: <%= query %></p>
-        <% for (l of loan) { %>
-            <p><%= l.lid %></p>
-            <p><%= l.amount %></p>
-            <p><%= l.duration %></p>
-            <p><%= l.installments %></p>
-            <p><%= l.bid %></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Amount</td>
+                    <td>Duration</td>
+                    <td>Installments</td>
+                    <td>Balance ID</td>
+                </tr>
+            </thead>
+            <% for (l of loans) { %>
+                <tbody>
+                    <tr>
+                        <td><%= l.lid %></td>
+                        <td><%= l.amount %></td>
+                        <td><%= l.duration %></td>
+                        <td><%= parseInt(l.installments) %></td>
+                        <td><%= l.bid %></td>
+                    </tr>
+                </tbody>
+            <% } %>
+        </table>
+    <% } %>
+
+    <% if (branches) { %>
+        <p class="query">Query: <%= query %></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Branch ID</td>
+                    <td>Name</td>
+                    <td>Location</td>
+                </tr>
+            </thead>
+        <% for (branch of branches) { %>
+            <tbody>
+                <tr>
+                    <td><%= branch.branchID %></td>
+                    <td><%= branch.branchName %></td>
+                    <td><%= branch.location %></td>
+                </tr>
+            </tbody>
         <% } %>
+        </table>
     <% } %>
 
 </main>

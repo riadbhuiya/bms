@@ -70,7 +70,8 @@ select {
 .login,
 .welcome,
 .read,
-.register {
+.register,
+.admin {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -92,7 +93,8 @@ select {
 
 #login > button,
 #register > button,
-.transaction > button {
+.transaction > button,
+thead {
 	color: white;
 	background-color: rgb(42, 142, 255);
 }
@@ -183,6 +185,7 @@ select {
 }
 
 /* table */
+
 td {
 	width: 8rem;
 	margin: 0;

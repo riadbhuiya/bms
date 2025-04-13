@@ -7,6 +7,7 @@ import { homeRouter } from "./routes/home.js"
 import { readRouter } from "./routes/read.js"
 import { loginRouter } from "./routes/login.js"
 import { registerRouter } from "./routes/register.js"
+import { adminRouter } from "./routes/admin.js"
 
 const app = express();
 const port = 8080;
@@ -26,6 +27,7 @@ app.use("/home", homeRouter);
 app.use("/read", readRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/admin", adminRouter);
 
 app.get("*", (req, res) => {
     res.redirect("/home")

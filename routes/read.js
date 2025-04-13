@@ -69,15 +69,15 @@ readRouter.get("/transaction/:uid", async (req, res) => {
         const uid = req.params.uid;
         
         const query = 
-            `select transaction.tid, transaction.date, transaction.sender_uid, transaction.receiver_uid, transaction.amount, user.fname
+            `select transaction.tid, transaction.date, transaction.sender_uid, sender.fname as sender_name, transaction.receiver_uid, receiver.fname as receiver_name,transaction.amount
 
             from transaction
             
-            inner join user
+            inner join user sender on transaction.sender_uid = sender.uid
+
+            inner join user receiver on transaction.receiver_uid = receiver.uid
             
-            on transaction.sender_uid = user.uid
-            
-            where user.uid = "${uid}"`;
+            where transaction.sender_uid = "${uid}"`;
 
         const connection = await pool.getConnection();
 

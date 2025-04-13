@@ -26,7 +26,11 @@ loginRouter.post("/welcome", async (req, res) => {
         pool.releaseConnection(connection);
 
         if (username === data[0].fname) {
-            res.render("welcome", { name: data[0].fname, uid: data[0].uid, register: false, query })
+            if (data[0].fname === "admin") {
+                res.render("admin", { query })
+            } else {
+                res.render("welcome", { name: data[0].fname, uid: data[0].uid, register: false, query })
+            }
         }
 
     } catch (e) {
