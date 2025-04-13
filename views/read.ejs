@@ -37,12 +37,16 @@
             <p><%= t.amount %></p>
         <% } %>
 
-        <form action="/transaction" class="transaction" method="post">
+        <form action="/transaction/send" class="transaction" method="post">
             <label for="receiver">Receiver</label>
-            <select name="receiver" id="receiver">
+            <select name="receiver" id="receiver" required>
                 <option value="">Select Receiver</option>
                 <option value=""></option>
             </select>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" class="amount" required>
+
             <button>Send</button>
         </form>
 

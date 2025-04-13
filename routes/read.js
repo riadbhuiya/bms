@@ -3,14 +3,14 @@ import { pool } from "../db.js";
 
 export const readRouter = express.Router();
 
-readRouter.get("/account/:fname", async (req, res) => {
+readRouter.get("/account/:uid", async (req, res) => {
 
     try{
-        const fname = req.params.fname;
+        const uid = req.params.uid;
         
-        const query = `select * from user where fname = "${fname}"`;
+        const query = `select * from user where uid = "${uid}"`;
 
-        console.log(fname);
+        console.log(uid);
 
         const connection = await pool.getConnection();
 
@@ -31,10 +31,10 @@ readRouter.get("/account/:fname", async (req, res) => {
     }
 })
 
-readRouter.get("/balance/:fname", async (req, res) => {
+readRouter.get("/balance/:uid", async (req, res) => {
     try {
         
-        const fname = req.params.fname;
+        const uid = req.params.uid;
         
         const query = `select balance.balance, balance.uid, user.fname
 
@@ -44,7 +44,7 @@ readRouter.get("/balance/:fname", async (req, res) => {
             
             on balance.uid = user.uid
             
-            where fname = "${fname}"`;
+            where user.uid = "${uid}"`;
 
         const connection = await pool.getConnection();
 
@@ -63,12 +63,13 @@ readRouter.get("/balance/:fname", async (req, res) => {
     }
 })
 
-readRouter.get("/transaction/:fname", async (req, res) => {
+readRouter.get("/transaction/:uid", async (req, res) => {
     try {
         
-        const fname = req.params.fname;
+        const uid = req.params.uid;
         
-        const query = `select transaction.tid, transaction.date, transaction.sender_uid, transaction.receiver_uid, transaction.amount, user.fname
+        const query = 
+            `select transaction.tid, transaction.date, transaction.sender_uid, transaction.receiver_uid, transaction.amount, user.fname
 
             from transaction
             
@@ -76,7 +77,7 @@ readRouter.get("/transaction/:fname", async (req, res) => {
             
             on transaction.sender_uid = user.uid
             
-            where fname = "${fname}"`;
+            where user.uid = "${uid}"`;
 
         const connection = await pool.getConnection();
 
@@ -95,9 +96,34 @@ readRouter.get("/transaction/:fname", async (req, res) => {
     }
 })
 
-readRouter.get("/loan", async (req, res) => {
+readRouter.post("/transaction/send", async (req, res) => {
     try {
-        const fname = req.params.fname;
+        const receiver = req.body.receiver;
+        const amount = req.body.amount;
+
+        const query = ``;
+
+        const connection = await pool.getConnection();
+
+        const [ transaction ] = await connection.query(
+            query
+        );
+
+        console.log(transaction)
+
+        pool.releaseConnection(connection);
+
+        res.render("", {})
+
+    } catch (e) {
+        console.log(`Database error: ${e}`)
+        res.send(`${e}`);
+    }
+})
+
+readRouter.get("/loan/:uid", async (req, res) => {
+    try {
+        const uid = req.params.uid;
 
         const query = 'select * from loan'
 

@@ -14,7 +14,7 @@ loginRouter.post("/welcome", async (req, res) => {
     console.log(password);
 
     try {
-        const query = `select fname, email, password from user where fname = "${username}" and password = "${password}" limit 1`;
+        const query = `select fname, email, password, uid from user where fname = "${username}" and password = "${password}" limit 1`;
 
         const connection = await pool.getConnection();
 
@@ -26,7 +26,7 @@ loginRouter.post("/welcome", async (req, res) => {
         pool.releaseConnection(connection);
 
         if (username === data[0].fname) {
-            res.render("welcome", { name: data[0].fname, register: false, query })
+            res.render("welcome", { name: data[0].fname, uid: data[0].uid, register: false, query })
         }
 
     } catch (e) {
