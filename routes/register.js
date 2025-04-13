@@ -9,14 +9,7 @@ registerRouter.get("/", (req, res) => {
 
 registerRouter.post("/", async (req, res) => {
 
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const email = req.body.email;
-    const password = req.body.pass;
-    const phone = req.body.phone;
-    const address = req.body.address;
-    const dob = req.body.dob;
-
+    const { fname, lname, email, password, phone, address, dob } = req.body;
 
     try {
         const query = `transaction`;

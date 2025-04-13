@@ -85,35 +85,42 @@ readRouter.get("/transaction/:uid", async (req, res) => {
             query
         );
 
+        const [ receivers ] = await connection.query(
+            `select uid from user where uid != ${uid}`
+        );
+
         console.log(transaction)
+        console.log(receivers)
 
         pool.releaseConnection(connection);
 
-        res.render("read", { transaction, users: false, balance: false, loan: false, query })
+        res.render("read", { transaction, users: false, balance: false, loan: false, query, receivers, uid })
     } catch (e) {
         console.log(`Database error: ${e}`)
         res.send(`${e}`);
     }
 })
 
-readRouter.post("/transaction/send", async (req, res) => {
+readRouter.post("/transaction/:uid", async (req, res) => {
     try {
-        const receiver = req.body.receiver;
-        const amount = req.body.amount;
+        const uid = parseInt(req.params.uid);
+        const { receiver, amount } = req.body;
 
-        const query = ``;
+        const query = `insert into transaction (sender_uid, receiver_uid, amount)
+                        values (${uid}, ${receiver}, ${amount})`;
 
         const connection = await pool.getConnection();
 
-        const [ transaction ] = await connection.query(
+        const [ statement ] = await connection.query(
             query
         );
 
-        console.log(transaction)
+        console.log(statement)
+        console.log([uid, receiver, amount])
 
         pool.releaseConnection(connection);
 
-        res.render("", {})
+        res.render("send", { statement, uid })
 
     } catch (e) {
         console.log(`Database error: ${e}`)
