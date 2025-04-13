@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2025 at 06:12 AM
+-- Generation Time: Apr 13, 2025 at 07:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,6 +40,26 @@ CREATE TABLE `balance` (
 INSERT INTO `balance` (`bid`, `balance`, `uid`) VALUES
 (1, 50, 1001),
 (2, 500, 1002);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `branches`
+--
+
+CREATE TABLE `branches` (
+  `branchID` int(11) NOT NULL,
+  `branchName` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `branches`
+--
+
+INSERT INTO `branches` (`branchID`, `branchName`, `location`) VALUES
+(1234, 'Mirpur', 'Mirpur 10'),
+(1235, 'Ashulia', 'Ashulia');
 
 -- --------------------------------------------------------
 
@@ -97,20 +117,23 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `email` varchar(100) NOT NULL,
-  `phone` varchar(11) NOT NULL
+  `phone` varchar(11) NOT NULL,
+  `branchID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`uid`, `fname`, `lname`, `dob`, `password`, `address`, `email`, `phone`) VALUES
-(1001, 'Riad', 'Bhuiya', '2025-03-20', 'hello', 'Changaon', 'riad@mail.com', '01711223344'),
-(1002, 'John', 'Wick', '1960-03-11', 'killer', 'Hollywood, California', 'jwkiller@email.com', '01811223344'),
-(1004, 'Tanjina', 'Akter', '2025-03-06', '123456', 'Geether', 'tanjina@mail.com', '01911223344'),
-(1007, 'Tanjina', 'Akter', '2025-03-11', '1234665', 'geeder', 'tanjinamailll.com', '01911223355'),
-(1008, 'Tanjina', 'Akter', '2025-03-11', '123456', 'geeder', 'tanjinamaillll.com', '01911223366'),
-(1009, 'Tanjina', 'Akter', '2025-03-11', '123456', 'geeder', 'tanjinamailllll.com', '01911223377');
+INSERT INTO `user` (`uid`, `fname`, `lname`, `dob`, `password`, `address`, `email`, `phone`, `branchID`) VALUES
+(1001, 'Riad', 'Bhuiya', '2025-03-20', 'hello', 'Changaon', 'riad@mail.com', '01711223344', 1234),
+(1002, 'John', 'Wick', '1960-03-11', 'killer', 'Hollywood, California', 'jwkiller@email.com', '01811223344', 1235),
+(1004, 'Tanjina', 'Akter', '2025-03-06', '123456', 'Geether', 'tanjina@mail.com', '01911223344', 1234),
+(1007, 'Tanjina', 'Akter', '2025-03-11', '1234665', 'geeder', 'tanjinamailll.com', '01911223355', NULL),
+(1008, 'Tanjina', 'Akter', '2025-03-11', '123456', 'geeder', 'tanjinamaillll.com', '01911223366', NULL),
+(1009, 'Tanjina', 'Akter', '2025-03-11', '123456', 'geeder', 'tanjinamailllll.com', '01911223377', NULL),
+(1012, 'abc', 'def', '2025-04-14', '123456', 'asdf;lskdfj', 'ac@mail.com', '01911223798', NULL),
+(1013, 'admin', 'bank', '1996-05-11', 'admin', 'localhost', 'admin@mail.com', '01235749654', NULL);
 
 --
 -- Indexes for dumped tables
@@ -122,6 +145,12 @@ INSERT INTO `user` (`uid`, `fname`, `lname`, `dob`, `password`, `address`, `emai
 ALTER TABLE `balance`
   ADD PRIMARY KEY (`bid`),
   ADD KEY `uid` (`uid`);
+
+--
+-- Indexes for table `branches`
+--
+ALTER TABLE `branches`
+  ADD PRIMARY KEY (`branchID`);
 
 --
 -- Indexes for table `loan`
@@ -144,7 +173,8 @@ ALTER TABLE `transaction`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `phone` (`phone`);
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD KEY `branchID` (`branchID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -155,6 +185,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `balance`
   MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `branches`
+--
+ALTER TABLE `branches`
+  MODIFY `branchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1236;
 
 --
 -- AUTO_INCREMENT for table `loan`
@@ -172,7 +208,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1014;
 
 --
 -- Constraints for dumped tables
@@ -196,6 +232,12 @@ ALTER TABLE `loan`
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`sender_uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE,
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`receiver_uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`branchID`) REFERENCES `branches` (`branchID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

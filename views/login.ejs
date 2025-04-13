@@ -4,8 +4,8 @@
     <h1 class="title">Login</h1>
 
     <form id="login" action="/login/welcome" method="post">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
 
         <label for="pass">Password</label>
         <input type="password" id="pass" name="pass" required>
@@ -15,11 +15,6 @@
     
     <a href="/register"><button>Register</button></a>
 
-    <% const register = false; %>
-    <% const query = ``; %>
-    <% if (register && query !== ``) { %>
-        <p class="query">Query: <%= query %></p>
-    <% } %>
 </main>
 
 <%- include("partials/footer") %>

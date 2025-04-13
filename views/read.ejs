@@ -36,6 +36,16 @@
             <p><%= t.receiver_uid %></p>
             <p><%= t.amount %></p>
         <% } %>
+
+        <form action="/transaction" class="transaction" method="post">
+            <label for="receiver">Receiver</label>
+            <select name="receiver" id="receiver">
+                <option value="">Select Receiver</option>
+                <option value=""></option>
+            </select>
+            <button>Send</button>
+        </form>
+
     <% } %>
 
     <% if (loan) { %>
