@@ -170,6 +170,10 @@ select {
 }
 
 /* transaction */
+.transaction {
+	margin-bottom: 1rem;
+}
+
 .transaction > button {
 	width: 5rem;
 }
@@ -177,6 +181,16 @@ select {
 #receiver, #amount {
 	width: 10rem;
 }
+
+/* table */
+td {
+	width: 8rem;
+	margin: 0;
+	border: solid black 1px;
+	text-align: center;
+	padding: 1rem;
+}
+
 
 @media (max-width: 768px) {
     .links, .hmain {
