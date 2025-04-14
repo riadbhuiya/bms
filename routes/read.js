@@ -17,11 +17,17 @@ readRouter.get("/account/:uid", async (req, res) => {
         const [ users ] = await connection.query(
             query
         );
+
+        const [ branch ] = await connection.query(
+            `select * from branches where branchID = ${users[0].branchID}`
+        );
+
         console.log(users)
+        console.log(branch)
 
         pool.releaseConnection(connection);
 
-        res.render("read", { users, balance: false, transaction: false, loan: false, query })
+        res.render("read", { users, branch: branch[0], balance: false, transaction: false, loans: false, view: false, branches: false, query })
 
     } catch (e) {
 
@@ -56,7 +62,7 @@ readRouter.get("/balance/:uid", async (req, res) => {
 
         pool.releaseConnection(connection);
 
-        res.render("read", { balance, users: false, transaction: false, loan: false, query })
+        res.render("read", { balance, users: false, transaction: false, loans: false, view: false, branches: false, query })
     } catch (e) {
         console.log(`Database error: ${e}`)
         res.send(`${e}`);
@@ -86,7 +92,7 @@ readRouter.get("/transaction/:uid", async (req, res) => {
         );
 
         const [ receivers ] = await connection.query(
-            `select uid from user where uid != ${uid}`
+            `select uid, fname from user where uid != ${uid}`
         );
 
         console.log(transaction)
@@ -94,7 +100,7 @@ readRouter.get("/transaction/:uid", async (req, res) => {
 
         pool.releaseConnection(connection);
 
-        res.render("read", { transaction, users: false, balance: false, loan: false, query, receivers, uid })
+        res.render("read", { transaction, users: false, balance: false, loans: false, view: false, query, branches: false, receivers, uid })
     } catch (e) {
         console.log(`Database error: ${e}`)
         res.send(`${e}`);
@@ -128,23 +134,23 @@ readRouter.post("/transaction/:uid", async (req, res) => {
     }
 })
 
-readRouter.get("/loan/:uid", async (req, res) => {
+readRouter.get("/loans/:uid", async (req, res) => {
     try {
         const uid = req.params.uid;
 
-        const query = 'select * from loan'
+        const query = 'select * from loans'
 
         const connection = await pool.getConnection();
 
-        const [ loan ] = await connection.query(
+        const [ loans ] = await connection.query(
             query
         );
 
-        console.log(loan)
+        console.log(loans)
 
         pool.releaseConnection(connection);
 
-        res.render("read", { loan, users: false, balance: false, transaction: false, query })
+        res.render("read", { loans, users: false, balance: false, transaction: false, branches: false, view: false, query })
     } catch (e) {
         console.log(`Database error: ${e}`)
         res.send(`${e}`);

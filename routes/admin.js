@@ -17,7 +17,7 @@ adminRouter.get("/branches", async (req, res) => {
 
         pool.releaseConnection(connection);
 
-        res.render("read", { branches, balance: false, transaction: false, loans: false, users: false, query })
+        res.render("read", { branches, balance: false, transaction: false, loans: false, view: false, users: false, query })
 
 
     } catch (e) {
@@ -28,7 +28,7 @@ adminRouter.get("/branches", async (req, res) => {
 
 adminRouter.get("/accounts", async (req, res) => {
     try {
-        const query = `select * from user`
+        const query = `select * from accounts`
 
         const connection = await pool.getConnection();
 
@@ -40,7 +40,7 @@ adminRouter.get("/accounts", async (req, res) => {
 
         pool.releaseConnection(connection);
 
-        res.render("read", { users, balance: false, transaction: false, loans: false, branches: false, query })
+        res.render("read", { users, balance: false, transaction: false, loans: false, branches: false, view: true, query })
 
 
     } catch (e) {
@@ -63,7 +63,7 @@ adminRouter.get("/loans", async (req, res) => {
 
         pool.releaseConnection(connection);
 
-        res.render("read", { loans, users: false, balance: false, transaction: false, branches: false, query })
+        res.render("read", { loans, users: false, balance: false, transaction: false, view: false, branches: false, query })
     } catch (e) {
         console.log(`Database error: ${e}`)
         res.send(`${e}`);

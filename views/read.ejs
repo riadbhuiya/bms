@@ -2,15 +2,22 @@
 
 <main class="read">
 
-    <h1 class="title">Account</h1>
-
     <% if (users) { %>
+        <% if (view) { %>
+            <h1 class="title">Accounts</h1>
+    
+            <p>From VIEW "accounts"</p>
+        <% } else { %>
+            <h1 class="title">Account</h1>
+        <% } %>
+
         <p class="query">Query: <%= query %></p>
 
         <table>
             <thead>
                 <tr>
-                    <td>ID</td>
+                    <td>Account No.</td>
+                    <td>Branch</td>
                     <td>Name</td>
                     <td>Date of Birth</td>
                     <td>Address</td>
@@ -23,6 +30,7 @@
                 <tbody>
                     <tr>
                         <td><%= user.uid %></td>
+                        <td><%= branch.branchName %></td>
                         <td><%= `${user.fname} ${user.lname}` %></td>  
                         <td><%= user.dob %></td>
                         <td><%= user.address %></td>  
@@ -35,12 +43,14 @@
     <% } %>
 
     <% if (balance) { %>
+        <h1 class="title">Balance</h1>
+
         <p class="query">Query: <%= query %></p>
 
         <table>
             <thead>
                 <tr>
-                    <td>User ID</td>
+                    <td>Account No.</td>
                     <td>Name</td>
                     <td>Balance</td>
                 </tr>
@@ -58,6 +68,7 @@
     <% } %>
 
     <% if (transaction) { %>
+        <h1 class="title">Transactions</h1>
 
         <p class="query">Query: <%= query %></p>
 
@@ -67,7 +78,7 @@
             <select name="receiver" id="receiver" required>
                 <option value="">Select Receiver</option>
                 <% for (receiver of receivers) { %>
-                    <option value="<%= receiver.uid %>"><%= receiver.uid %></option>
+                    <option value="<%= receiver.uid %>"><%= receiver.fname %></option>
                 <% } %>
             </select>
 
@@ -105,6 +116,8 @@
     <% } %>
 
     <% if (loans) { %>
+        <h1 class="title">Loans</h1>
+        
         <p class="query">Query: <%= query %></p>
 
         <table>
@@ -112,7 +125,7 @@
                 <tr>
                     <td>ID</td>
                     <td>Amount</td>
-                    <td>Duration</td>
+                    <td>Duration (months)</td>
                     <td>Installments</td>
                     <td>Balance ID</td>
                 </tr>
@@ -132,6 +145,8 @@
     <% } %>
 
     <% if (branches) { %>
+        <h1 class="title">Branches</h1>
+
         <p class="query">Query: <%= query %></p>
 
         <table>
