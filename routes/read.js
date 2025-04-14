@@ -138,7 +138,11 @@ readRouter.get("/loans/:uid", async (req, res) => {
     try {
         const uid = req.params.uid;
 
-        const query = 'select * from loans'
+        const query =  `select u.uid, u.fname, u.lname, l.lid, l.amount as loan_amount, l.duration, l.installments 
+                        from loan l 
+                        inner join balance as b ON l.bid = b.bid 
+                        inner join user u ON b.uid = u.uid 
+                        where u.uid = ${uid}`;
 
         const connection = await pool.getConnection();
 

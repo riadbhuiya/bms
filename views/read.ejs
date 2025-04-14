@@ -123,21 +123,23 @@
         <table>
             <thead>
                 <tr>
-                    <td>ID</td>
+                    <td>Account No.</td>
+                    <td>Name</td>
+                    <td>Loan ID</td>
                     <td>Amount</td>
                     <td>Duration (months)</td>
-                    <td>Installments</td>
-                    <td>Balance ID</td>
+                    <td>Installment Amount</td>
                 </tr>
             </thead>
             <% for (l of loans) { %>
                 <tbody>
                     <tr>
+                        <td><%= l.uid %></td>
+                        <td><%= l.fname %> <%= l.lname %></td>
                         <td><%= l.lid %></td>
-                        <td><%= l.amount %></td>
+                        <td><%= l.loan_amount %></td>
                         <td><%= l.duration %></td>
-                        <td><%= parseInt(l.installments) %></td>
-                        <td><%= l.bid %></td>
+                        <td><%= l.installments %></td>
                     </tr>
                 </tbody>
             <% } %>

@@ -212,15 +212,30 @@ thead > tr >td {
 .nav {
 	display: flex;
 	flex-direction: row;
-	padding: 1rem 2rem;
 	justify-content: space-between;
 	align-items: center;
+	padding: 1rem 2rem;
+	background-color: white;
 	border-bottom: 1px solid;
+	position: sticky;
+	top: 0;
+	z-index: 5;
 }
 
 .menu > a {
 	margin: 0 0.3rem;
 	text-decoration: none;
+}
+
+/* stack */
+
+.stack {
+	display: flex;
+	flex-direction: row;
+}
+
+.stack > div > img {
+	width: 150px;
 }
 
 @media (max-width: 768px) {
