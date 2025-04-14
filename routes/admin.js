@@ -51,7 +51,10 @@ adminRouter.get("/accounts", async (req, res) => {
 
 adminRouter.get("/loans", async (req, res) => {
     try {
-        const query = 'select * from loan'
+        const query = `select u.uid, u.fname, u.lname, l.lid, l.amount as loan_amount, l.duration, l.installments 
+                        from loan l 
+                        inner join balance as b ON l.bid = b.bid 
+                        inner join user u ON b.uid = u.uid`;
 
         const connection = await pool.getConnection();
 
