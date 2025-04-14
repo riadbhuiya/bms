@@ -74,7 +74,9 @@ select {
 .welcome,
 .read,
 .register,
-.admin {
+.admin,
+.about,
+.report {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
